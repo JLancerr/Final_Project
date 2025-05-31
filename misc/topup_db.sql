@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2025 at 10:44 AM
+-- Generation Time: May 31, 2025 at 06:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -88,13 +88,6 @@ CREATE TABLE `transactions` (
   `purchase_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `transactions`
---
-
-INSERT INTO `transactions` (`transaction_id`, `user_id`, `game_id`, `product_id`, `account_id`, `purchase_date`) VALUES
-(100000, 100010, 100000, 100000, '133', '2025-05-31');
-
 -- --------------------------------------------------------
 
 --
@@ -104,15 +97,16 @@ INSERT INTO `transactions` (`transaction_id`, `user_id`, `game_id`, `product_id`
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL
+  `password` varchar(70) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `email`, `password`) VALUES
-(100010, 'test.@gmail.com', 'AyakaLaosNa');
+INSERT INTO `users` (`user_id`, `email`, `password`, `name`) VALUES
+(100037, 'test.@gmail.com', '$2y$10$.53nEHctiWT1p.GWnaG9UON7DOWPkUQfyRcM.VGCEh1ETwRfB3gdG', 'AyakaIsMid');
 
 --
 -- Indexes for dumped tables
@@ -162,13 +156,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100001;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100018;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100011;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100038;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
