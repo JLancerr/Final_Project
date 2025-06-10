@@ -44,13 +44,13 @@
                     </div>
                     <div class="col align-items-center flex-col sign-up" id="registerPanel">
                         <div class="form-wrapper align-items-center">
-                            <form class="form sign-up" id="registerForm">
+                            <form method="post" action="../../php/signup.php" class="form sign-up" id="registerForm">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">
                                         <i class="fa-solid fa-address-book"></i>
                                     </span>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="name" oninput="checkInput(this)" pattern="[A-Za-z\s*]+" title="Names must only contain alphabetic characters only." autocomplete="off" required>
+                                        <input value="Lance Jay Padillo" type="text" class="form-control" name="full_name" id="name" placeholder="Full Name" oninput="checkInput(this)" pattern="[A-Za-z\s*]+" title="Names must only contain alphabetic characters only." autocomplete="off" required>
                                         <label for="name" class="form-label">Full Name</label>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                                 <i class="fa-solid fa-phone"></i>
                                             </span>
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" name="number" id="number" placeholder="number" oninput="checkInput(this)" pattern="\d{11}" title="Please enter exactly 11 numeric characters" autocomplete="off" required>
+                                                <input value="09669517784" type="text" class="form-control" name="number" id="number" placeholder="number" oninput="checkInput(this)" pattern="\d{11}" title="Please enter exactly 11 numeric characters" autocomplete="off" required>
                                                 <label for="number" class="form-label">Mobile Number</label>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                                 <i class="fa-solid fa-calendar-days"></i>
                                             </span>
                                             <div class="form-floating">
-                                                <input type="date" class="form-control" name="birthdate" id="birthdate" max="2007-01-01" placeholder="number" autocomplete="off" required>
+                                                <input value="2005-03-02" type="date" class="form-control" name="birthdate" id="birthdate" max="2007-01-01" placeholder="number" autocomplete="off" required>
                                                 <label for="birthdate" class="form-label">Birthdate</label>
                                             </div>
                                         </div>
@@ -79,7 +79,7 @@
                                             <i class="fa-solid fa-envelope"></i>
                                         </span>
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" oninput="checkInput(this)" autocomplete="off" required>
+                                            <input value="lancejaypadillo@gmail.com" type="email" class="form-control" name="email" id="email" placeholder="Email" oninput="checkInput(this)" autocomplete="off" required>
                                             <label for="email" class="form-label">Email Address</label>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                                             <i class="fa-solid fa-circle-user"></i>
                                         </span>
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" name="username" id="regusername" placeholder="username" oninput="checkInput(this)" autocomplete="off" required>
+                                            <input value="Lancer" type="text" class="form-control" name="username" id="regusername" placeholder="username" oninput="checkInput(this)" autocomplete="off" required>
                                             <label for="regusername" class="form-label">Username</label>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
                                             <i class="fa-solid fa-key"></i>
                                         </span>
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" name="password" id="regpassword" placeholder="Confirm password" oninput="checkPassword(this)" required>
+                                            <input value="Father" type="password" class="form-control" name="password" id="regpassword" placeholder="Confirm password" oninput="checkPassword(this)" required>
                                             <label for="regpassword" class="form-label">Password</label>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                             <i class="fa-solid fa-check-double"></i>
                                         </div>  
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" name="password" id="confirmregpassword" placeholder="Confirm password" oninput="checkPassword(this)" required>
+                                            <input value="Father" type="password" class="form-control" name="password" id="confirmregpassword" placeholder="Confirm password" oninput="checkPassword(this)" required>
                                             <label for="confirmregpassword" class="form-label">Confirm Password</label>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
                                         <span>
                                             Already have an account?
                                         </span>
-                                        <a onclick="toggle()" class="pointer">
+                                        <a href="../Login/Login.html" onclick="toggle()" class="pointer">
                                             Sign in here
                                         </a>
                                     </p>

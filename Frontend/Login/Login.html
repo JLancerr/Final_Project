@@ -41,7 +41,7 @@
                         <h2 style="font-weight: 900;">Login</h2>
                     </div>
                     <div class="form-wrapper">
-                        <div class="form sign-in">
+                        <form method="post" action="../../php/login.php" class="form sign-in">
                             <div class="input-group mb-4">
                                 <span class="input-group-text">
                                     <i class="fa-solid fa-user"></i>
@@ -65,7 +65,7 @@
                                 <label class="form-check-label" for="flexCheckDefault">Show Password</label>
                             </div>
                             <small class="form-text text-danger text-start d-none" id="invalid-account">*Invalid Username or Password</small>
-                            <button class="mt-1" type="button" onclick="login()">Sign in</button>
+                            <button class="mt-1" type="submit" onclick="login()">Sign in</button>
                             <p class="text-center">
                                 <a onclick="toggleReset()" class="pointer">
                                     Forgot password?
@@ -77,7 +77,7 @@
                                 </span>
                                 <a onclick="toggleRegister()" class="pointer">Sign up here</a>
                             </p>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </section>
