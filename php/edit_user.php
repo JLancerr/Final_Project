@@ -12,20 +12,29 @@
         exit(); 
     }
 
-    $query = $conn->prepare("SELECT user_id FROM users WHERE email = ? AND NOT user_id = ?");
-    $query->bind_param("si", $_POST['email'], $_POST['user_id']);
-    $query->execute();
-    $result = $query->get_result();
-    $duplicates = $result->fetch_all();
-    if (count($duplicates) > 0) {
-        header('Location: ../templates/home.php?error=duplicate_email');
+    $conn->begin_transaction();
+    try {
+        $query = $conn->prepare("SELECT user_id FROM users WHERE email = ? AND NOT user_id = ?");
+        $query->bind_param("si", $_POST['email'], $_POST['user_id']);
+        $query->execute();
+        $result = $query->get_result();
+        $duplicates = $result->fetch_all();
+        if (count($duplicates) > 0) {
+            header('Location: ../templates/home.php?error=duplicate_email');
+            exit();
+        }
+
+        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $query = $conn->prepare("UPDATE users SET email = ?, password = ?, name = ? WHERE user_id = ?");
+        $query->bind_param("sssi", $_POST['email'], $hashed_password, $_POST['name'], $_POST['user_id']);
+        $query->execute();
+        $conn->commit();
+    }
+    catch (mysqli_sql_exception $exception)  {
+        $conn->rollback();
+        header('Location: ../templates/home.php?error=edit_failed');
         exit();
     }
-
-    $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $query = $conn->prepare("UPDATE users SET email = ?, password = ?, name = ? WHERE user_id = ?");
-    $query->bind_param("sssi", $_POST['email'], $hashed_password, $_POST['name'], $_POST['user_id']);
-    $query->execute();
 
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['name'] = $_POST['name'];
