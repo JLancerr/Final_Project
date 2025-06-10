@@ -6,8 +6,8 @@
         exit(); 
     }
 
-    $admin_email = "Admin_Monsieur_Neuvillette@gmail.com";
-    $admin_password = "AyakaLaosNa";
+    $admin_email = "admin@gmail.com";
+    $admin_password = "Ayucka";
     if ($_POST['email'] == $admin_email) {
         if ($_POST['password'] == $admin_password) {
             header('Location: ../templates/admin.php');
