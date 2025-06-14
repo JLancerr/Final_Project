@@ -1,4 +1,0 @@
-mysqli_sql_exception: Unknown column '$id' in 'where clause' in D:\XAMPP\htdocs\ITEC STUDENT MANAGEMENT SYSTEM\Landing Page\landing.php:359
-Stack trace:
-#0 D:\XAMPP\htdocs\ITEC STUDENT MANAGEMENT SYSTEM\Landing Page\landing.php(359): mysqli->query('UPDATE users SE...')
-#1 {main}
