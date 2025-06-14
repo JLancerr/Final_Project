@@ -1,0 +1,4 @@
+mysqli_sql_exception: Got a packet bigger than 'max_allowed_packet' bytes in D:\XAMPP\htdocs\ITEC STUDENT MANAGEMENT SYSTEM\Landing Page\landing.php:379
+Stack trace:
+#0 D:\XAMPP\htdocs\ITEC STUDENT MANAGEMENT SYSTEM\Landing Page\landing.php(379): mysqli_stmt->execute()
+#1 {main}

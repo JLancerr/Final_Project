@@ -1,0 +1,4 @@
+mysqli_sql_exception: Duplicate entry 'Bedrock' for key 'username' in C:\Users\Bedrock\Documents\xampp\htdocs\Registration Page\registration.php:265
+Stack trace:
+#0 C:\Users\Bedrock\Documents\xampp\htdocs\Registration Page\registration.php(265): mysqli_stmt->execute()
+#1 {main}

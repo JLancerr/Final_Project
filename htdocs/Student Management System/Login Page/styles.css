@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+
+@keyframes pop {
+    from {
+        transform: scale(0.95);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.account {
+    font-family: "Poppins", sans-serif;
+}
+
+.desc {
+    font-family: "Montserrat", sans-serif;
+}
+
+.header {
+    border-radius: 20px 20px 0 0;
+}
+
+
+#main {
+    max-width: 600px;
+    animation: pop 0.5s ease;
+}
+
+.form {
+    border-radius: 0 0 10px 10px;
+}
+
+#nav {
+    margin-left: 0px;
+}
+
+#bar {
+    display: flex;
+    line-height: 1;
+}
+
+#bar h2 {
+    font-family: "Arvo";
+    font-style: italic;
+    font-weight: 700;
+}
+
+#bar p {
+    font-family: "Poppins";
+}
+
+ul li a {
+    position: relative;
+}
+
+ul li a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    height: 2px;
+    width: 0;
+    background-color: white;
+    transition: all 0.5s ease;
+}
+
+ul li a:hover::after {
+    width: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+    #bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #bar div {
+        display: grid;
+        place-items: center;
+    }
+
+    #bar div p {
+        text-align: center;
+    }
+
+    #top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.invalid-feedback {
+    font-family: "Poppins";
+}

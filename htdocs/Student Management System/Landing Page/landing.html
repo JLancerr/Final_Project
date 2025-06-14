@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>CvSU ManageMe</title>
+            <link rel="stylesheet" href="style.css">
+            <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+            <script src="tabswitch.js"></script>
+            <script src="https://kit.fontawesome.com/f38a153b0a.js" crossorigin="anonymous"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        </head>
+        <body>
+            <div class="navigation-bar-container bg-success" id="navbar">
+                <nav class="navbar d-flex align-items-start navigation-bar">
+                    <div class="container d-flex flex-column align-items-start" id="navigation-links-container">
+                        <div class="container d-flex flex-column align-items-center navigation-header">
+                            <img src="images/logo.png" alt="CvSU Logo" width="90">
+                            <h3 class="text-white text-center">CvSU ManageMe</h3>
+                            <small class="text-white text-center">Student Activity Management System</small>
+                        </div>
+                        <ul class="container-fluid navbar-nav mt-3" id="navigation-links">
+                            <li class="nav-item mb-3">
+                                <a class="nav-link text-white text-center" onclick="showTab('profile')">
+                                    <i class="fa-solid fa-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="nav-item mb-3">
+                                <a class="nav-link text-white text-center" onclick="showTab('submit-activity')">
+                                    <i class="fa-solid fa-file-export"></i>
+                                    Submit Activity
+                                </a>
+                            </li>
+                            <li class="nav-item mb-3">
+                                <a class="nav-link text-white text-center" onclick="showTab('other-students')">
+                                    <i class="fa-solid fa-users"></i>
+                                    Other students
+                                </a>
+                            </li>
+                            <li class="nav-item mb-3">
+                                <a class="nav-link text-white text-center" onclick="showTab('edit-profile')">
+                                    <i class="fa-solid fa-sliders"></i>
+                                    Edit Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white text-center" href="#">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="container" id="section-container">
+                <section id="profile">
+                    <div class="container-fluid d-flex justify-content-between align-items-end bg-warning position-relative profile-top-part">
+                        <button class="btn btn-success position-absolute top-0 left-0 navButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar" style="display: none;"><i class="fa-solid fa-bars"></i></button>
+                        <div class="m-3" id="profile-status">
+                            <h5 class="text-start">Status:<span class="badge bg-danger">Not Submitted</span></h5>
+                        </div>
+                        <div class="container-fluid d-flex justify-content-center align-items-end nameplate-container">
+                            <div class="container-fluid nameplate" id="nameplate">
+                                <h2 class="text-sm-end">BALBA, TERRENCE JOSHUA</h2>
+                                <p class="text-sm-end">Bachelor of Science in Computer Science</p>
+                            </div>
+                            <img src="images/default.jpg" alt="Default Profile Picture" id="previewimg1">
+                        </div>
+                    </div>
+                    <div class="container-fluid d-flex flex-column profile-bottom-part">
+                        <div class="container-fluid p-5 profile-details">
+                            <div class="container-fluid" id="responsive-nameplate" style="display: none !important;">
+                                <h2 class="text-center">BALBA, TERRENCE JOSHUA</h2>
+                                <p class="text-center">Bachelor of Science in Computer Science</p>
+                            </div>
+                            <div class="container-fluid m-3" id="responsive-status" style="display: none !important;">
+                                <h5 class="text-center">Status:<span class="badge bg-danger">Not Submitted</span></h5>
+                            </div>
+                            <!-- <div class="alert alert-success">
+                                <strong>Success!</strong> Your profile was updated!
+                            </div>  -->
+                            <div class="row profile-info-text">
+                                <h3>Profile Information</h3>
+                            </div>
+                            <div class="row mt-4 input-row">
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">Username</label>
+                                    <input class="form-control" type="text" value="Terrence Joshua" style="height: 50px;" disabled>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">Contact</label>
+                                    <input class="form-control" type="text" value="Balba" style="height: 50px;" disabled>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">Age</label>
+                                    <input class="form-control" type="text" value="18 years old" style="height: 50px;" disabled>
+                                </div>
+                            </div>
+                            <div class="row input-row">
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">First Name</label>
+                                    <input class="form-control" type="text" value="Terrence Joshua" style="height: 50px;" disabled>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">Last Name</label>
+                                    <input class="form-control" type="text" value="Balba" style="height: 50px;" disabled>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">Student Email</label>
+                                    <input class="form-control" type="text" value="Terrencejoshua.balba@cvsu-main.edu.ph" style="height: 50px;" disabled>
+                                </div>
+                            </div>
+                            <div class="row input-row">
+                                <div class="col-sm-12 mb-3">
+                                    <label class="form-label" for="">Address</label>
+                                    <input class="form-control" type="text" value="Blk 22 Lot 21 22 Townsville subd. Sabang Dasmarinas Cavite" style="height: 50px;" disabled>
+                                </div>
+                                
+                            </div>
+                            <div class="row input-row">
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">Birthdate</label>
+                                    <input class="form-control" type="text" value="06-14-2005" style="height: 50px;" disabled>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">Program</label>
+                                    <input class="form-control" type="text" value="Bachelor of Science in Computer Science" style="height: 50px;" disabled>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <label class="form-label" for="">CvSU Branch</label>
+                                    <input class="form-control" type="text" value="Main" style="height: 50px;" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="submit-activity">
+                    <div class="container-fluid d-flex justify-content-center bg-warning other-students-top-part">
+                        <h2>Submit Activities</h2>
+                    </div>
+                    <div class="container-fluid d-flex align-items-center justify-content-center my-5 submit-card-container">
+                        <div class="container-fluid card submit-card" id="submit-card">
+                            <div class="card-header bg-warning submit-card-header">
+                                <p>Submit Activity</p>
+                            </div>
+                            <div class="card-body">
+                                <h5>Here you can submit your due activities</h5>
+                                <p>Pending Tasks</p>
+                                <ul>
+                                    <li>Take a photo of CvSU Building</li>
+                                    <li>Take a photo of yourself exercising</li>
+                                </ul>
+                                <div class="form-group">
+                                    <form id="filesubmit" method="post" action="#">
+                                        <label for="fileInput" class="form-label">Choose File</label>
+                                        <input type="file" class="form-control" id="fileInput" multiple>
+                                    </form>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="button" class="btn btn-primary my-3 w-25" data-bs-toggle="modal" data-bs-target="#submitActivity">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="other-students">
+                    <div class="container-fluid d-flex justify-content-center bg-warning other-students-top-part">
+                        <h2>Other Students</h2>
+                    </div>
+                    <div class="container-fluid d-flex flex-column align-items-center student-card-container">
+                        <div class="student-card card my-2 col-sm-5">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <img class="rounded-circle img-fluid" src="images/default.jpg" alt="Default Picture" width="70">
+                                <p class="ms-2">Tamad, Juan</p>
+                                <p class="d-flex flex-column align-items-center">Status:<span class="badge bg-danger mx-2">Not Submitted</span></p> 
+                            </div>
+                        </div>
+                        <div class="student-card card my-2 col-sm-5">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <img class="rounded-circle img-fluid" src="images/default.jpg" alt="Default Picture" width="70">
+                                <p class="ms-2">Penduko, Pedro</p>
+                                <p class="d-flex flex-column align-items-center">Status:<span class="badge bg-secondary mx-2">Pending</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="edit-profile">
+                    <div class="container-fluid d-flex justify-content-between align-items-end bg-warning position-relative edit-profile-top-part">
+                        <button class="btn btn-success position-absolute top-0 left-0 navButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar" style="display: none;"><i class="fa-solid fa-bars"></i></button>
+                        <div class="container-fluid d-flex justify-content-start align-items-end nameplate-container">
+                            <img src="images/default.jpg" alt="Default Profile Picture" id="previewimg2">
+                            <h3>Edit Profile Information</h3>
+                        </div>
+                    </div>
+                    <div class="container-fluid d-flex flex-column edit-profile-bottom-part">
+                        <div class="container-fluid p-5 profile-details">
+                            <div class="d-flex flex-column responsive-nameplate" style="display: none !important;">
+
+                            </div>
+                            <div class="d-flex justify-content-center m-3 responsive-status" style="display: none !important;">
+
+                            </div>
+                            <form action="#" method="post" enctype="multipart/form-data" id="editprof">
+                                <div class="row my-4 d-flex flex-column profile-input">
+                                    <label for="profilepic" class="form-label">Upload Profile Picture</label>
+                                    <input class="form-control mx-3" type="file" name="profile" id="profilepic" style="max-width: 300px;">
+                                </div>
+                                <div class="row input-row">
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label" for="">Username</label>
+                                        <input class="form-control" type="text" value="Balba" style="height: 50px;">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label" for="">Old Password</label>
+                                        <input class="form-control" type="password"  style="height: 50px;">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label" for="">New Password</label>
+                                        <input class="form-control" type="password"  style="height: 50px;">
+                                    </div>
+                                </div>
+                                <div class="row input-row">
+                                    <div class="col-sm-8 mb-3">
+                                        <label class="form-label" for="">Address</label>
+                                        <input class="form-control" type="text" value="Blk 22 Lot 21 22 Townsville subd. Sabang Dasmarinas Cavite" style="height: 50px;">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label" for="">Birthdate</label>
+                                        <input class="form-control" type="date" value="2005-06-14" style="height: 50px;">
+                                    </div>
+                                </div>
+                                <div class="row input-row">
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label" for="">Contact Number</label>
+                                        <input class="form-control" type="number" value="Terrence Joshua" style="height: 50px;">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label" for="">First Name</label>
+                                        <input class="form-control" type="text" value="Terrence Joshua" style="height: 50px;">
+                                    </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <label class="form-label" for="">Last Name</label>
+                                        <input class="form-control" type="text" value="Balba" style="height: 50px;">
+                                    </div>
+                                </div>
+                                <div class="container-fluid button-container my-4 d-flex justify-content-center p-0">
+                                    <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#profileEdit">Submit Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Modals -->
+
+            <!-- Submit Activity Modal -->
+            <div class="modal fade" id="submitActivity" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Submission</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to submit?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="submit()">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confirm Edit Modal -->
+            <div class="modal fade" id="profileEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm Changes</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to submit changes?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="submitprofile()">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="script.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+        </body>
+    </html>
