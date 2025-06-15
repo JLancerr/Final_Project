@@ -7,6 +7,20 @@
         header("Location: login.php");
         exit();
     }
+
+    include('../validation/connect.php');
+
+    $sql = "SELECT * FROM games";
+    $result = $conn->query($sql);
+
+    $rows = [];
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+    } else {
+        echo "No results found.";
+    }
 ?>
 
 
@@ -54,11 +68,11 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><p class="dropdown-header">Account Settings</p></li>
-                                        <li><a class="dropdown-item" href="/Profile.html">View Account</a></li>
-                                        <li><a class="dropdown-item" href="/Edit.html">Edit Account</a></li>
-                                        <li><a class="dropdown-item" href="/Transactions.html">Transactions</a></li>
+                                        <li><a class="dropdown-item" href="../View/View.html">View Account</a></li>
+                                        <li><a class="dropdown-item" href="../Edit/Edit.html">Edit Account</a></li>
+                                        <li><a class="dropdown-item" href="../Transactions/transactions.html">Transactions</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                        <li><a class="dropdown-item" href="../Login/Login.php">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -127,55 +141,111 @@
                 <h2 class="text-white mx-4" style="font-weight: 800;">Games</h2>
                 <div class="game-cards">
                     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                        <div class="col">
-                            <div class="card">
-                                <img src="../Images/genshin.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Genshin Impact</h5>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#genshinmodal">
-                                        Top Up
-                                    </button>
+                        <?php foreach ($rows as $row): ?>
+                            <?php
+                                $gamebanner = base64_encode($row['gamebanner']);
+                                $gamemodal = base64_encode($row['gamemodal']);
+                                $currency = base64_encode($row['currency']);
+                                $currencyimg = '"data:image/jpeg;base64,' . $currency . '"';
+                                $gamebannerimg = '"data:image/jpeg;base64,' . $gamebanner . '"';
+                                $gamemodalimg = '"data:image/jpeg;base64,' . $gamemodal . '"';
+                            ?>
+                            <div class="col">
+                                <div class="card">
+                                    <img src=<?= $gamebannerimg ?> class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= htmlspecialchars($row['game_name'])?></h5>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?= htmlspecialchars($row['game_id'])?>">
+                                            Top Up
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src="../Images/valorant.avif" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Valorant</h5>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#valorantmodal">
-                                        Top Up
-                                    </button>
+                            <div class="modal fade" id="<?= htmlspecialchars($row['game_id'])?>" tabindex="-1" aria-labelledby="<?= htmlspecialchars($row['game_id'])?>label" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header px-0">
+                                            <img src=<?= $gamemodalimg ?> class="img-fluid">
+                                        </div>
+                                        <div class="modal-body">
+                                            <h2 style="font-weight: 800;"><?= htmlspecialchars($row['game_name'])?> <?= htmlspecialchars($row['currency_name'])?></h2>
+                                            <div class="first-step">
+                                                <p>1. Input UID and Server</p>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Input UID" aria-label="Text input with dropdown button">
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected>Choose Server</option>
+                                                        <option value="1">Asia</option>
+                                                        <option value="2">Europe</option>
+                                                        <option value="3">America</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="second-step mb-3">
+                                                <p>2. Choose Product</p>
+                                                <div class="products">
+                                                    <div class="row g-3">
+                                                        <?php 
+                                                            $query = "SELECT games.currency_name, products.amount, products.price FROM games LEFT JOIN products ON games.game_id = products.game_id WHERE games.game_id = " . $row['game_id'] . ";";
+                                                            $queryresult = $conn->query($query);
+
+                                                            $currencies = [];
+                                                            if ($queryresult->num_rows > 0) {
+                                                                while($row = $queryresult->fetch_assoc()) {
+                                                                    $currencies[] = $row;
+                                                                }
+                                                            } else {
+                                                                echo "No results found.";
+                                                            }
+                                                        ?>
+                                                        <?php foreach ($currencies as $curr): ?>
+                                                            
+                                                                <div class="col-6 product">
+                                                                    <div class="d-flex border rounded p-2 w-100">
+                                                                        <img src=<?= $currencyimg ?> style="width: 50px; height: 50px;">
+                                                                        <div>
+                                                                            <span style="font-weight: 700;"><?= htmlspecialchars($curr['amount'])?> <?= htmlspecialchars($curr['currency_name'])?></span>
+                                                                            <span class="text-secondary"><?= htmlspecialchars($curr['price'])?>php</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="third-step">
+                                                <p>3. Choose Payment Method</p>
+                                                <div class="payments">
+                                                    <div class="row g-3 mb-3">
+                                                        <div class="col payment">
+                                                            <div class="d-flex border rounded p-2 w-100">
+                                                                <img src="../Images/gcash.png" style="width: 50px; height: 50px;">
+                                                                <div class="d-flex align-items-center justify-content-center mx-4">
+                                                                    <span style="font-weight: 700;">GCash</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col payment">
+                                                            <div class="d-flex border rounded p-2 w-100">
+                                                                <img src="../Images/cc.png" style="width: 50px; height: 50px;">
+                                                                <div class="d-flex align-items-center justify-content-center ms-4">
+                                                                    <span style="font-weight: 700;">Credit Card</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Proceed to Payment</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src="../Images/mlgames.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mobile Legends</h5>
-                                    <a href="#" class="btn btn-primary">Top Up</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src="../Images/codmgames.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Call Of Duty</h5>
-                                    <a href="#" class="btn btn-primary">Top Up</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src="../Images/wildriftgames.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Wild Rift</h5>
-                                    <a href="#" class="btn btn-primary">Top Up</a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </section>
@@ -191,242 +261,7 @@
                     </div>
                 </div>
             </section>
-            <section class="Modals">
-                <!-- Genshin Impact Modal -->
-                <div class="modal fade" id="genshinmodal" tabindex="-1" aria-labelledby="genshinmodallabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header px-0">
-                                <img src="../Images/genshinmodal.png" class="img-fluid">
-                            </div>
-                            <div class="modal-body">
-                                <h2 style="font-weight: 800;">Genshin Impact Genesis Crystals</h2>
-                                <div class="first-step">
-                                    <p>1. Input UID and Server</p>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Input UID" aria-label="Text input with dropdown button">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Choose Server</option>
-                                            <option value="1">Asia</option>
-                                            <option value="2">Europe</option>
-                                            <option value="3">America</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="second-step mb-3">
-                                    <p>2. Choose Product</p>
-                                    <div class="products">
-                                        <div class="row g-3 mb-3">
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">50 Genesis Crystals</span>
-                                                        <span class="text-secondary">40php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">100 Genesis Crystals</span>
-                                                        <span class="text-secondary">80php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row g-3 mb-3">
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">200 Genesis Crystals</span>
-                                                        <span class="text-secondary">120php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">1000 Genesis Crystals</span>
-                                                        <span class="text-secondary">600php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row g-3">
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">2500 Genesis Crystals</span>
-                                                        <span class="text-secondary">1500php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">5000 Genesis Crystals</span>
-                                                        <span class="text-secondary">3500php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="third-step">
-                                    <p>3. Choose Payment Method</p>
-                                    <div class="payments">
-                                        <div class="row g-3 mb-3">
-                                            <div class="col payment">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/gcash.png" style="width: 50px; height: 50px;">
-                                                    <div class="d-flex align-items-center justify-content-center mx-4">
-                                                        <span style="font-weight: 700;">GCash</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col payment">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/cc.png" style="width: 50px; height: 50px;">
-                                                    <div class="d-flex align-items-center justify-content-center ms-4">
-                                                        <span style="font-weight: 700;">Credit Card</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Proceed to Payment</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Valorant Modal -->
-                <div class="modal fade" id="valorantmodal" tabindex="-1" aria-labelledby="valorantmodallabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header px-0">
-                                <img src="../Images/valorantmodal.jpg" class="img-fluid">
-                            </div>
-                            <div class="modal-body">
-                                <h2 style="font-weight: 800;">Valorant Riot Points</h2>
-                                <div class="first-step">
-                                    <p>1. Input Riot ID</p>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Input Riot ID" aria-label="Text input with dropdown button">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Choose Server</option>
-                                            <option value="1">Asia</option>
-                                            <option value="2">Europe</option>
-                                            <option value="3">America</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="second-step mb-3">
-                                    <p>2. Choose Product</p>
-                                    <div class="products">
-                                        <div class="row g-3 mb-3">
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/riotpoints.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">50 Genesis Crystals</span>
-                                                        <span class="text-secondary">40php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">100 Genesis Crystals</span>
-                                                        <span class="text-secondary">80php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row g-3 mb-3">
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">200 Genesis Crystals</span>
-                                                        <span class="text-secondary">120php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">1000 Genesis Crystals</span>
-                                                        <span class="text-secondary">600php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row g-3">
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">2500 Genesis Crystals</span>
-                                                        <span class="text-secondary">1500php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col product">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/genesiscrystals.png" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <span style="font-weight: 700;">5000 Genesis Crystals</span>
-                                                        <span class="text-secondary">3500php</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="third-step">
-                                    <p>3. Choose Payment Method</p>
-                                    <div class="payments">
-                                        <div class="row g-3 mb-3">
-                                            <div class="col payment">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/gcash.png" style="width: 50px; height: 50px;">
-                                                    <div class="d-flex align-items-center justify-content-center mx-4">
-                                                        <span style="font-weight: 700;">GCash</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col payment">
-                                                <div class="d-flex border rounded p-2 w-100">
-                                                    <img src="../Images/cc.png" style="width: 50px; height: 50px;">
-                                                    <div class="d-flex align-items-center justify-content-center ms-4">
-                                                        <span style="font-weight: 700;">Credit Card</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Proceed to Payment</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
             <section class="">
                 <footer class="text-center text-white" style="background-color: #2d3047;">
                     <div class="container p-4 pb-0">
