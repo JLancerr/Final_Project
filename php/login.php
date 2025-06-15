@@ -16,6 +16,7 @@
     }
 
     $conn->begin_transaction();
+    
     try {
         $query = $conn->prepare('SELECT * FROM users WHERE username = ?');
         $query->bind_param('s', $_POST['username']);

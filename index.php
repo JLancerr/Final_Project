@@ -1,4 +1,4 @@
 <?php 
-    header('Location: Frontend/Landing/Landing.html');
+    header('Location: ../Frontend/Landing/Landing.html');
     exit();
 ?>
