@@ -1,3 +1,33 @@
+<?php
+    include('../../php/connect.php');
+    session_start();
+
+    try {
+        $query = $conn->prepare("SELECT 
+            t.transaction_id,
+            g.game_name,
+            g.currency_name,
+            p.amount,
+            p.price,
+            t.account_id,
+            t.purchase_date
+        FROM transactions t
+        INNER JOIN users u ON t.user_id = u.user_id
+        INNER JOIN games g ON t.game_id = g.game_id
+        INNER JOIN products p ON t.product_id = p.product_id
+        WHERE u.user_id = ?;");
+        
+        $query->bind_param("i", $_SESSION['user_id']);
+        $query->execute();
+        $result = $query->get_result();
+        $transaction_history = $result->fetch_all(MYSQLI_ASSOC);
+    }
+    catch (mysqli_sql_exception $exception)  {
+        header('Location: ../Frontend/Dashboard/Dashboard.php?error=transactions_error');
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -27,7 +57,7 @@
                                 <li class="nav-item m-3">
                                     <ul class="navbar-nav">
                                         <li class="nav-item mx-2">
-                                            <a href="#Home" class="nav-link text-white">Home</a>
+                                            <a href="../Dashboard/Dashboard.php" class="nav-link text-white">Home</a>
                                         </li>
                                         <li class="nav-item mx-2">
                                             <a href="#About Us" class="nav-link text-white">About Us</a>
@@ -41,11 +71,11 @@
                                     </button>
                                     <ul class="dropdown-menu show">
                                         <li><p class="dropdown-header">Account Settings</p></li>
-                                        <li><a class="dropdown-item" href="/Profile.html">View Account</a></li>
-                                        <li><a class="dropdown-item" href="/Edit.html">Edit Account</a></li>
-                                        <li><a class="dropdown-item active" href="/Transactions.html">Transactions</a></li>
+                                        <li><a class="dropdown-item" href="../View/View.php">View Account</a></li>
+                                        <li><a class="dropdown-item" href="../Edit/Edit.php">Edit Account</a></li>
+                                        <li><a class="dropdown-item" href="../Transactions/Transactions.php">Transactions</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                        <li><a class="dropdown-item" href="../../php/logout.php">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -71,19 +101,25 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Start Date</th>
-                                                <th scope="col">End Date</th>
+                                                <th scope="col">Transaction ID</th>
+                                                <th scope="col">Game Name</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Account ID</th>
+                                                <th scope="col">Purchase Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php foreach($transaction_history as $record) {?>
                                                     <tr>
-                                                        <th scope="row">{{ loop.index }}</th>
-                                                        <td>{{ item['Type'] }}</td>
-                                                        <td>{{ item['Start Date'] }}</td>
-                                                        <td>{{ item['End Date'] }}</td>
+                                                        <th scope="row"><?php echo $record['transaction_id']?></th>
+                                                        <th scope="row"><?php echo $record['game_name']?></th>
+                                                        <th scope="row"><?php echo $record['amount'] . " " . $record['currency_name']?></th>
+                                                        <th scope="row"><?php echo $record['price']?></th>
+                                                        <th scope="row"><?php echo $record['account_id']?></th>
+                                                        <th scope="row"><?php echo $record['purchase_date']?></th>
                                                     </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>

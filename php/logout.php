@@ -2,6 +2,6 @@
     session_start();
     $_SESSION = [];
     session_destroy();
-    header('Location: ../templates/landing.html');
+    header('Location: ../Frontend/Landing/Landing.html');
     exit();
 ?>

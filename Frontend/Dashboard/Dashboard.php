@@ -31,7 +31,7 @@
                                 <li class="nav-item m-3">
                                     <ul class="navbar-nav">
                                         <li class="nav-item mx-2">
-                                            <a href="#Home" class="nav-link text-white">Home</a>
+                                            <a href="../Dashboard/Dashboard.php" class="nav-link text-white">Home</a>
                                         </li>
                                         <li class="nav-item mx-2">
                                             <a href="#About Us" class="nav-link text-white">About Us</a>
@@ -45,11 +45,11 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><p class="dropdown-header">Account Settings</p></li>
-                                        <li><a class="dropdown-item" href="/Profile.html">View Account</a></li>
-                                        <li><a class="dropdown-item" href="/Edit.html">Edit Account</a></li>
-                                        <li><a class="dropdown-item" href="/Transactions.html">Transactions</a></li>
+                                        <li><a class="dropdown-item" href="../View/View.php">View Account</a></li>
+                                        <li><a class="dropdown-item" href="../Edit/Edit.php">Edit Account</a></li>
+                                        <li><a class="dropdown-item" href="../Transactions/Transactions.php">Transactions</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                        <li><a class="dropdown-item" href="../../php/logout.php">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>

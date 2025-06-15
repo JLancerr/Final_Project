@@ -6,11 +6,12 @@
         exit(); 
     }
 
+
     $admin_email = "admin@gmail.com";
     $admin_password = "Ayucka";
     if ($_POST['username'] == $admin_email) {
         if ($_POST['password'] == $admin_password) {
-            header('Location: ../templates/admin.php'); # Remember to change this
+            header('Location: ../templates/admin.php'); 
             exit();
         }
     }
@@ -42,8 +43,6 @@
 
     session_start();
     $_SESSION['user_id'] = $user_info['user_id'];
-    $_SESSION['email'] = $user_info['email'];
-    $_SESSION['name'] = $user_info['name'];
     
     header('Location: ../Frontend/Dashboard/Dashboard.php');
     exit();

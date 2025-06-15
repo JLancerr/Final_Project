@@ -40,7 +40,7 @@
                     <div class="banner mb-4">
                         <h2 style="font-weight: 900;">Login</h2>
                     </div>
-                    <form class="form-wrapper">
+                    <form method="post" action="../../php/login.php" class="form-wrapper">
                         <div class="form sign-in">
                             <div class="input-group mb-4">
                                 <span class="input-group-text">
@@ -65,7 +65,7 @@
                                 <label class="form-check-label" for="flexCheckDefault">Show Password</label>
                             </div>
                             <small class="form-text text-danger text-start" id="invalid-account">*Invalid Username or Password</small>
-                            <button class="mt-1" type="button" onclick="login()">Sign in</button>
+                            <button class="mt-1" type="submit">Sign in</button>
                             <p class="text-center my-2">
                                 <a href="#">Forgot password?</a>
                             </p>
@@ -85,7 +85,7 @@
             <script>
                 // Sample Functions
                 function login() {
-                    location.href = "../Dashboard/Dashboard.html";
+                    location.href = "../../php/login.php";
                 }
             </script>
         </body>
