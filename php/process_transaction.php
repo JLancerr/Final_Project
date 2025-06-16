@@ -30,12 +30,12 @@
         $query->bind_param("di", $reward_points, $_POST['user_id']);
         $query->execute();
 
-        $query = $conn->prepare("INSERT INTO transactions (user_id, game_id, product_id, account_id, purchase_date) VALUES (?, ?, ?, ?, ?)");
-        $query->bind_param("iiiss", $_POST['user_id'], $_POST['game_id'], $_POST['product_id'], $_POST['account_id'], $_POST['purchase_date']);
+        $query = $conn->prepare("INSERT INTO transactions (user_id, game_id, product_id, account_id, purchase_date, game_amount) VALUES (?, ?, ?, ?, ?, ?)");
+        $query->bind_param("iiisss", $_POST['user_id'], $_POST['game_id'], $_POST['product_id'], $_POST['account_id'], $_POST['purchase_date'], $_POST['game_amount']);
         $query->execute();
 
         $conn->commit();
-        header('Location: ../templates/home.php?status=transaction_successful');
+        header('Location: ../Dashboard/Dashboard.php?status=transaction_successful');
         exit();
     }
     catch (mysqli_sql_exception $exception) {
