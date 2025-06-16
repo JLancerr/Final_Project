@@ -2,7 +2,7 @@
     $success = $_GET['status'] ?? '';
     $succmess = ['transaction_successful' => 'Transaction Successful!'];
     if ($success) {
-        echo "<script>alert('Transaction Successful')</script>;";
+        echo "<script>alert('Transaction Successful')</script>";
     }
 ?>
 
@@ -210,8 +210,9 @@
                                                                 echo "No results found.";
                                                             }
                                                         ?>
+                                                        <input type="text" name="game_amount" value="" class="d-none">
                                                         <?php foreach ($currencies as $curr): ?>
-                                                            
+                                                                
                                                                 <div class="col-6 product">
                                                                     <div class="d-flex border rounded p-2 w-100" onclick="select(this)">
 
@@ -228,9 +229,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            
+
                                                         <?php endforeach; ?>
-                                                        <input type="text" name="game_amount" value="" id="game_amount">
                                                     </div>
                                                 </div>
                                             </div>
@@ -310,11 +310,20 @@
                 });
             </script>
             <script>
-                function select(element) {
-                    let amountText = element.querySelector("span").innerText;
-                    const gameAmount = document.getElementById("game_amount");
-                    gameAmount.value = amountText;
-                }
+                
+                    function select(el) {
+                        // Traverse upward to the main container holding the input and products
+                        const container = el.closest('.row') || document;
+
+                        // Find the nearest previous input with name "game_amount"
+                        const input = container.querySelector('input[name="game_amount"]');
+
+                        const amountText = el.querySelector('.amount_value')?.textContent.trim(); 
+                        if (input) {
+                            input.value = amountText || "Selected";
+                        }
+                    }
+                
             </script>
         </body>
     </html>

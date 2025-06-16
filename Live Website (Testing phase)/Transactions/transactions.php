@@ -7,7 +7,7 @@
             t.transaction_id,
             g.game_name,
             g.currency_name,
-            p.amount,
+            t.game_amount,
             p.price,
             t.account_id,
             t.purchase_date
@@ -85,7 +85,7 @@
             </header>
             <main>
                 <div class="effect p-5">
-                    <div class="container shadow rounded bg-white p-3 w-50 h-100">
+                    <div class="container shadow rounded bg-white p-3 w-75 h-100">
                         <div class="container border-bottom mb-3">
                             <h1>Transaction History</h1>
                         </div>
@@ -93,7 +93,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#car" aria-expanded="true" aria-controls="{{ key }}">
-                                        Toyota
+                                        Recent Transactions
                                     </button>
                                 </h2>
                                 <div id="car" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -114,7 +114,7 @@
                                                     <tr>
                                                         <th scope="row"><?php echo $record['transaction_id']?></th>
                                                         <th scope="row"><?php echo $record['game_name']?></th>
-                                                        <th scope="row"><?php echo $record['amount'] . " " . $record['currency_name']?></th>
+                                                        <th scope="row"><?php echo $record['game_amount'] . " " . $record['currency_name']?></th>
                                                         <th scope="row"><?php echo $record['price']?></th>
                                                         <th scope="row"><?php echo $record['account_id']?></th>
                                                         <th scope="row"><?php echo $record['purchase_date']?></th>
