@@ -28,6 +28,7 @@
             <link rel="stylesheet" href="../Modules/fontawesome/css/fontawesome.css">
             <link rel="stylesheet" href="../Modules/fontawesome/css/brands.css">
             <link rel="stylesheet" href="../Modules/fontawesome/css/solid.css">
+            <link rel="icon" type="image/x-icon" href="../Images/logo.svg">
             <link rel="stylesheet" href="./Edit.css">
             <title>TopHub | Profile</title>
         </head>
@@ -65,7 +66,7 @@
                                         <li><a class="dropdown-item" href="../Edit/Edit.php">Edit Account</a></li>
                                         <li><a class="dropdown-item" href="../Transactions/Transactions.php">Transactions</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="../../php/logout.php">Log Out</a></li>
+                                        <li><a class="dropdown-item" href="../validation/logout.php">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>

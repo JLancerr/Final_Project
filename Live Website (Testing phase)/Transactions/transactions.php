@@ -39,7 +39,8 @@
             <link rel="stylesheet" href="../Modules/splide/dist/css/splide.min.css">
             <link rel="stylesheet" href="../Modules/bootstrap/css/bootstrap.min.css">
             <link rel="stylesheet" href="./transactions.css">
-            <title>Document</title>
+            <link rel="icon" type="image/x-icon" href="../Images/logo.svg">
+            <title>TopHub | Transactions</title>
         </head>
         <body>
             <header>
@@ -73,9 +74,9 @@
                                         <li><p class="dropdown-header">Account Settings</p></li>
                                         <li><a class="dropdown-item" href="../View/View.php">View Account</a></li>
                                         <li><a class="dropdown-item" href="../Edit/Edit.php">Edit Account</a></li>
-                                        <li><a class="dropdown-item" href="../Transactions/Transactions.php">Transactions</a></li>
+                                        <li><a class="dropdown-item active" href="../Transactions/Transactions.php">Transactions</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="../../php/logout.php">Log Out</a></li>
+                                        <li><a class="dropdown-item" href="../validation/logout.php">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -91,26 +92,26 @@
                         </div>
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#car" aria-expanded="true" aria-controls="{{ key }}">
-                                        Recent Transactions
-                                    </button>
-                                </h2>
-                                <div id="car" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">Transaction ID</th>
-                                                <th scope="col">Game Name</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Account ID</th>
-                                                <th scope="col">Purchase Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach($transaction_history as $record) {?>
+                                <?php foreach($transaction_history as $record) {?>
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<?= $record['transaction_id']?>" aria-expanded="true">
+                                            <?= $record['purchase_date'] ?>
+                                        </button>
+                                    </h2>
+                                    <div id="<?= $record['transaction_id']?>" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">Transaction ID</th>
+                                                    <th scope="col">Game Name</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Account ID</th>
+                                                    <th scope="col">Purchase Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
                                                     <tr>
                                                         <th scope="row"><?php echo $record['transaction_id']?></th>
                                                         <th scope="row"><?php echo $record['game_name']?></th>
@@ -119,11 +120,11 @@
                                                         <th scope="row"><?php echo $record['account_id']?></th>
                                                         <th scope="row"><?php echo $record['purchase_date']?></th>
                                                     </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@
             <link rel="stylesheet" href="../Modules/fontawesome/css/solid.css">
             <link rel="stylesheet" href="../Modules/splide/dist/css/splide.min.css">
             <link rel="stylesheet" href="../Modules/bootstrap/css/bootstrap.min.css">
+            <link rel="icon" type="image/x-icon" href="../Images/logo.svg">
             <link rel="stylesheet" href="./Landing.css">
             <title>Welcome | TopHub</title>
         </head>
@@ -140,6 +141,32 @@
                         </div>
                     </div>
 
+                    </div>
+                </div>
+            </section>
+            <section id="about" class="py-5 bg-dark text-light">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <!-- Image Side -->
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <img src="../Images/aboutbg.jpg" alt="About TopHub" class="img-fluid rounded shadow-lg">
+                        </div>
+                        <!-- Text Side -->
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h2 class="display-5 fw-bold mb-3">Who We Are</h2>
+                            <p class="lead">
+                            <strong>TopHub</strong> is your ultimate destination for discovering the most popular and thrilling games in the world. From action-packed shooters to immersive role-playing adventures, we bring the gaming universe to your fingertips.
+                            </p>
+                            <p>
+                            We provide instant, safe, and reliable top-up services for your favorite games like <strong>Genshin Impact</strong>, <strong>Call of Duty Mobile</strong>, and <strong>Mobile Legends</strong>. No delays, no worries—just seamless experiences with the click of a button.
+                            </p>
+                            <ul class="list-unstyled mt-4">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Trusted by thousands of gamers</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Fast and secure transactions</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> 24/7 support from our team</li>
+                            </ul>
+                            <a href="#services" class="btn btn-primary mt-4 px-4 py-2">Explore Our Services</a>
+                        </div>
                     </div>
                 </div>
             </section>

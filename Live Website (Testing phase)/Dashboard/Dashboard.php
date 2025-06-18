@@ -1,6 +1,5 @@
 <?php
     $success = $_GET['status'] ?? '';
-    $succmess = ['transaction_successful' => 'Transaction Successful!'];
     if ($success) {
         echo "<script>alert('Transaction Successful')</script>";
     }
@@ -44,6 +43,7 @@
             <link rel="stylesheet" href="../Modules/fontawesome/css/solid.css">
             <link rel="stylesheet" href="../Modules/splide/dist/css/splide.min.css">
             <link rel="stylesheet" href="../Modules/bootstrap/css/bootstrap.min.css">
+            <link rel="icon" type="image/x-icon" href="../Images/logo.svg">
             <link rel="stylesheet" href="./Dashboard.css">
             <title>TopHub</title>
         </head>
@@ -81,7 +81,7 @@
                                         <li><a class="dropdown-item" href="../Edit/edit.php">Edit Account</a></li>
                                         <li><a class="dropdown-item" href="../Transactions/transactions.php">Transactions</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="../Login/Login.php">Log Out</a></li>
+                                        <li><a class="dropdown-item" href="../validation/logout.php">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>

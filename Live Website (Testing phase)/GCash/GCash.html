@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="../Modules/fontawesome/css/fontawesome.css">
+        <link rel="stylesheet" href="../Modules/fontawesome/css/brands.css">
+        <link rel="stylesheet" href="../Modules/fontawesome/css/solid.css">
+        <link rel="stylesheet" href="../Modules/splide/dist/css/splide.min.css">
+        <link rel="stylesheet" href="../Modules/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./gcash.css">
+        <title>GCash Navbar</title>
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="logo">
+                <img src="../Images/gcash.png" alt="GCash Logo">
+                <span>GCash</span>
+            </div>
+
+            <div class="user">
+                <span>Hi, Juan</span>
+                <img src="https://i.pravatar.cc/150?img=3" alt="User Avatar">
+            </div>
+        </header>
+        <main class="d-flex justify-content-center">
+            <div class="gcash-container mx-auto my-5">
+                <img src="../Images/gcash.png" class="gcash-logo" alt="GCash Logo">
+                <h2>GCash Payment</h2>
+                <form>
+                    <label for="mobile">Mobile Number</label>
+                    <input type="text" id="mobile" placeholder="09XXXXXXXXX" required>
+
+                    <label for="pin">GCash MPIN</label>
+                    <input type="password" id="pin" placeholder="****" required>
+
+                    <button type="submit" class="btn-pay">Pay ₱500.00</button>
+                </form>
+                <p class="note">You will receive an SMS confirmation after successful payment.</p>
+            </div>
+        </main>
+    </body>
+</html>

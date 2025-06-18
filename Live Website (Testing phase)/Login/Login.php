@@ -18,6 +18,7 @@
             <link rel="stylesheet" href="../Modules/fontawesome/css/solid.css">
             <link rel="stylesheet" href="../Modules/splide/dist/css/splide.min.css">
             <link rel="stylesheet" href="../Modules/bootstrap/css/bootstrap.min.css">
+            <link rel="icon" type="image/x-icon" href="../Images/logo.svg">
             <link rel="stylesheet" href="./Login.css">
             <script>
                 window.onload = function() {

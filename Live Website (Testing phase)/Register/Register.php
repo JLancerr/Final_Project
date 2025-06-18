@@ -11,6 +11,7 @@
             <link rel="stylesheet" href="../Modules/fontawesome/css/fontawesome.css">
             <link rel="stylesheet" href="../Modules/fontawesome/css/brands.css">
             <link rel="stylesheet" href="../Modules/fontawesome/css/solid.css">
+            <link rel="icon" type="image/x-icon" href="../Images/logo.svg">
             <title>Register | TopHub</title>
         </head>
         <body>
